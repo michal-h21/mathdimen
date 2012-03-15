@@ -1,0 +1,61 @@
+\ProvidesPackage{mathdimen}[2012/03/01 v0.1]
+
+\RequirePackage{newfile,etoolbox}
+
+%variable definitions
+\@ifpackageloaded{tex4ht}{}{
+\newoutputstream{mathdim}
+\openoutputfile{\jobname.mtd}{mathdim}
+}
+\newcount\dmath@count
+\newbox\MathBox
+
+
+\newcommand\save@math@dimens{%
+\addtostream{mathdim}{\noexpand\mathdim{\the\dmath@count}{\the\wd\MathBox}{\the\ht\MathBox}{\the\dp\MathBox}}
+}
+
+\newcommand\step@math@count{\global\advance\dmath@count by1\relax}
+% Display math definitions
+\newcommand\Start@math@box{%
+\setlength{\abovedisplayskip}{0pt}
+\setlength{\belowdisplayskip}{0pt}
+\setbox\MathBox=\vbox\bgroup
+}
+\newcommand\End@math@box{%
+\egroup\copy\MathBox%
+\setbox\MathBox=\vbox{\unvbox\MathBox\unskip\unpenalty\unkern}%
+\step@math@count
+%\advance\dmath@count by1\relax%
+%Výška: \the\ht\MathBox, šířka \the\wd\MathBox
+%\addtostream{mathdim}{\noexpand\mathdim{\the\dmath@count}{\the\wd\MathBox}{\the\ht\MathBox}{\the\dp\MathBox}}
+\save@math@dimens
+}
+
+%We must redefine the math commands
+\let\oldbdisplay\[
+\let\oldedisplay\]
+\let\oldbmath\(
+\let\oldemath\)
+
+
+\renewcommand\[{%\]
+\Start@math@box\oldbdisplay
+}
+
+\renewcommand\]{%
+\oldedisplay\End@math@box
+} 
+\renewcommand\({%%%    \) end brackets because of broken syntax highlighting in gedit
+\setbox\MathBox=\hbox\bgroup\oldbmath
+}
+
+\renewcommand\){%
+\oldemath\egroup%
+\step@math@count
+\save@math@dimens
+}
+\BeforeBeginEnvironment{equation}{\Start@math@box}
+\AfterEndEnvironment{equation}{\End@math@box}
+
+

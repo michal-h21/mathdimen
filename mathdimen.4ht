@@ -1,0 +1,101 @@
+
+\newcommand\mathdim[4]{%
+\csgdef{mathdim@#1}{{#2}{#3}{#4}}
+\csgdef{mathdim@#1@wt}{#2}
+\csgdef{mathdim@#1@ht}{#3}
+\csgdef{mathdim@#1@dp}{#4}
+}
+
+\def\GetWidth#1{%
+\csuse{mathdim@#1@wt}
+}
+\def\GetHeigth#1{%
+(\csuse{mathdim@#1@ht}+\csuse{mathdim@#1@dp})
+}
+\def\GetDepth#1{%
+\csuse{mathdim@#1@dp}
+}
+
+\def\ConvertPoints#1{%
+\strip@pt\dimexpr#1/\a:ConvertPoints\relax \b:ConvertPoints
+}
+
+\NewConfigure{ConvertPoints}{2}
+\Configure{ConvertPoints}{10}{em}
+\input\jobname.mtd
+
+\renewcommand\Start@math@box{}
+\renewcommand\End@math@box{}
+\def\GetPictureName{\j:bname\P:ctureCount x\Pic:Dm} % extension is in \PictExt
+\def\GetPrevPictureName{\j:bname\the\numexpr\P:ctureCount-1\relax x\Pic:Dm} % extension is in \PictExt
+\let\oldsmathbox\Start@math@box
+
+%\def
+
+%\NewConfigure
+\NewConfigure{FormatDisplay}{1}
+\def\FormatDisplay{
+%\global\advance\dmath@count by1\relax
+\step@math@count
+\csuse{mathdim@\the\dmath@count}
+\a:FormatDisplay}
+\Configure{FormatDisplay}{\HCode{Nazdar\Hnewline}}
+
+
+\def\AltMathRb#1\){%
+\def\MathContent{#1}
+\AltMath{#1}
+}
+
+
+\def\AltMath#1{
+\step@math@count
+\edef\width{\ConvertPoints{\GetWidth{\the\dmath@count}}}
+\edef\height{\ConvertPoints{\GetHeigth{\the\dmath@count}}}
+\edef\depth{\ConvertPoints{\GetDepth{\the\dmath@count}}}
+\a:AltMath
+%#1
+\b:AltMath% $
+\c:AltMath
+}
+\NewConfigure{AltMath}{3}
+\Configure{AltMath}{\MathmlMath}{\PictureMath}{\EmptyMath}
+
+\def\MathmlMath{%
+\a:MathmlMath
+\DviMath$\MathContent$\EndDviMath
+\b:MathmlMath
+}
+\NewConfigure{MathmlMath}{3}
+\Configure{MathmlMath}{}{}{}
+
+\def\PictureMath{%
+\a:PictureMath
+\Picture+{ \c:PictureMath}$\MathContent$\EndPicture
+\b:PictureMath
+}
+\NewConfigure{PictureMath}{3}
+\Configure{PictureMath}{}{}{ style="height:\height; vertical-align:-\depth;"}
+
+\def\EmptyMath{%
+\a:EmptyMath
+\b:EmptyMath
+\c:EmptyMath
+}
+\NewConfigure{EmptyMath}{3}
+\Configure{EmptyMath}{}
+{\Tg<img src="\GetPrevPictureName\PictExt .svg" type="image/svg+xml" style="height:\height; vertical-align:-\depth;"/>}{}
+
+
+\:CheckOption{mathml}\if:Option
+\Configure{@math}{}
+\fi
+
+\Configure{()}{\AltMathRb}{\egroup}
+\Configure{[]}{\MyDisplay\FormatDisplay\DviMath$$}{$$\EndDviMath\EndMyDisplay}
+\def\MyDisplay{\leavevmode\EndP\HCode{<!--l. \the\inputlineno-->\Hnewline}\IgnorePar\a:MyDisplay}
+\NewConfigure{MyDisplay}{1}
+\Configure{MyDisplay}{\Tg<div class="math-display">}
+\def\EndMyDisplay{\HCode{<!--l. \the\inputlineno-->\Hnewline}\a:EndMyDisplay}
+\NewConfigure{EndMyDisplay}{1}
+\Configure{EndMyDisplay}{\Tg</div>}
