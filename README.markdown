@@ -94,3 +94,14 @@ There is also section
 
 Which uses `dvipng` instead of `convert` and `dvips` and in my opinion the output is better. So to use this configuration, just erase spaces before `<convert>` and `</convert>`, and add space at the beginning of `<dvipng>` and `</dvipng>`
 
+With `mathdimen`, it is possible to use one image format as the preferred and other as the fallback, for example prefer the `svg` and if the viewer doesn't support `svg`, use `png` as fallback. Configuration for such case can be:
+
+    G.png
+    Gdvipng -T tight -x 1400 -D 92 -bg Transparent -pp %%2:%%2 %%1 -o %%3
+    Gdvisvgm -n -p %%2 -c 1.2,1.2 -s %%1 > %%3.svg
+
+If you want to use the images with device, that has bigger screen resolution than PC monitor, for example some e-ink device, you can set the resolution of the image to higher values. You should set higher resolution also in the case, if you want to be able to resize the `html` page, only be aware that in some browsers (IE), subsampled images don't look good.
+
+### Configuration of the hooks
+
+`tex4ht` can be configured using so called _hooks_ 
