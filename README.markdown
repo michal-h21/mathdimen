@@ -26,4 +26,10 @@ Sample text with some math inside \(c=\sqrt{a^2+b^2}\). Text now continues. \(\s
 \end{document}
 ```
 
+Output without `matdhimen`:
+<img src="https://github.com/michal-h21/mathdimen/raw/master/images/without-mathdimen.png" alt="You can see wrong vertical position" />
+and with `mathdimen`
+<img src="https://github.com/michal-h21/mathdimen/raw/master/images/with-mathdimen.png" />
+
+
 
