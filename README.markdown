@@ -123,7 +123,7 @@ There are three commands that you can use with `\Configure{AltMath}`:
 
 -  `\EmptyMath` - for referencing existing images
 -  `\PictureMath` - for convesion math into image
--  `\MathMlMath` - for math without conversion - with `mathml` option it can be mathml
+-  `\MathmlMath` - for math without conversion - with `mathml` option it can be mathml
 
 Every one of these commands can be also configured. 
 Command `\Tg<tagname>` inserts `html` tag, we use inline `css` to set vertical alignment and height using `\depth` and `\height` commands. All dimensions are in `em`. The formula for computing the dimensions is `saved dimension in pt / ConvertPoints`. Default `ConvertPoints`  configuration is `\Configure{ConvertPoints}{10}{em}`. 
@@ -134,3 +134,41 @@ This sample configuration will generate image of this form:
 src="sample0x.png" alt="    √ -2----2
 c =   a  + b  "  type="image/svg+xml" style="height:1.248em; vertical-align:-0.16573em;" /></object>.
 ```
+
+For output in `ePub3` format
+```xml
+<epub:switch >
+    <epub:case required-namespace="http://www.w3.org/1998/Math/MathML">
+        <math xmlns="http://www.w3.org/1998/Math/MathML"> 
+            ... 
+        </math>
+    </epub:case>
+
+    <epub:case required-namespace="http://www.w3.org/2000/svg">
+        <img src="picname.svg" type="image/svg+xml" style="height:1.2em; vertical-align:-0.3em;"/>
+    </epub:case>
+
+    <epub:default>
+         <img style=" {baseline-positioning-code} " src="picname.png" style="height:1.2em; vertical-align:-0.3em;" 
+                  alt=" {math speech text} "/>
+    </epub:default>
+</epub:switch>
+```
+one can use similar configuration
+
+```LaTeX
+\Configure{AltMath}{\MathmlMath}{\EmptyMath}{\PictureMath}
+``` 
+and configure `MathmlMath`, `EmptyMath` and `PictureMath` to output the right tags
+
+## Running
+
+First of all, run
+
+```sh
+latex sample
+``` 
+
+on your file, so the dimensions are saved into `sample.mtd` file. Then run 
+
+
