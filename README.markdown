@@ -120,7 +120,8 @@ To configure the hooks, you can create custom configuration file, for example `m
 ```
 
 There are three commands that you can use with `\Configure{AltMath}`:
-- `\EmptyMath` 
-- `\PictureMath`
-- `\MathMlMath`
+
+-  `\EmptyMath` 
+-  `\PictureMath`
+-  `\MathMlMath`
 
