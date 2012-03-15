@@ -1,3 +1,6 @@
+*warning*: this package is experimental
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
 # Mathdimen
 
 With `tex4ht`, it is possible to convert LaTeX files to various output formats. Certain elements with difficult formating, typically math content, can be converted to images. Unfortunately, when these images are used in the running text, they can have wrong vertical placement or wrong size.
@@ -182,3 +185,14 @@ in case you want `mathml`, `utf8` and your config file is named `mycfg.cfg` try 
 ```bash
 htlatex sample "mycfg, mathml, charset=utf-8" " -cunihtf -utf8"
 ```
+
+## Issues
+
+-  support for display math is missing
+-  sometimes there are roundingerrors in dimensions calculations
+-  I don't know, how to add support for `$` and `$$` commands
+
+## ToDo
+
+-  add more lowlevel details into the documentation
+-  do more testing
