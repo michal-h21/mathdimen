@@ -136,6 +136,7 @@ c =   a  + b  "  type="image/svg+xml" style="height:1.248em; vertical-align:-0.1
 ```
 
 For output in `ePub3` format
+
 ```xml
 <epub:switch >
     <epub:case required-namespace="http://www.w3.org/1998/Math/MathML">
@@ -154,6 +155,7 @@ For output in `ePub3` format
     </epub:default>
 </epub:switch>
 ```
+
 one can use similar configuration
 
 ```LaTeX
@@ -171,4 +173,12 @@ latex sample
 
 on your file, so the dimensions are saved into `sample.mtd` file. Then run 
 
+```bash
+htlatex sample basename_of_your_configfile
+```
 
+in case you want `mathml`, `utf8` and your config file is named `mycfg.cfg` try this:
+
+```bash
+htlatex sample "mycfg, mathml, charset=utf-8" " -cunihtf -utf8"
+```
