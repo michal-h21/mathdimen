@@ -1,5 +1,5 @@
 *warning*: this package is experimental
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------
  
 # Mathdimen
 
