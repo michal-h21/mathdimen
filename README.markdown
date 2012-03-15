@@ -29,7 +29,7 @@ Sample text with some math inside \(c=\sqrt{a^2+b^2}\). Text now continues. \(\s
 Output without `matdhimen`:
 <img width="841px" src="https://github.com/michal-h21/mathdimen/raw/master/images/without-mathdimen.png" alt="You can see wrong vertical position" />
 and with `mathdimen`, using `svg` image for math
-<img width="863px" src="https://github.com/michal-h21/mathdimen/raw/master/images/with-mathdimen.png" alt="Slightly better vertical alignment"/>
+<img width="843px" src="https://github.com/michal-h21/mathdimen/raw/master/images/with-mathdimen.png" alt="Slightly better vertical alignment"/>
 
 
 
