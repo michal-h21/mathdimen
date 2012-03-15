@@ -106,4 +106,21 @@ If you want to use the images with device, that has bigger screen resolution tha
 
 ### Configuration of the hooks
 
-`tex4ht` can be configured using so called _hooks_ 
+`tex4ht` can be configured using so called _hooks_. `mathdimen` provides some hooks, allowing you to change some aspects of the process.
+
+To configure the hooks, you can create custom configuration file, for example `myfile.cfg`
+
+```LaTeX
+\Preamble{xhtml, charset=utf-8}
+\begin{document}
+\Configure{AltMath}{\EmptyMath}{\PictureMath}{}
+\Configure{EmptyMath}{\Tg<object data="\GetPictureName .png.svg" type="image/svg+xml" style="height:\height; vertical-align:-\depth;"/>}{}{}
+\Configure{PictureMath}{}{\Tg</object>}{ style="height:\height; vertical-align:-\depth;"}
+\EndPreamble
+```
+
+There are three commands that you can use with `\Configure{AltMath}`:
+- `\EmptyMath` 
+- `\PictureMath`
+- `\MathMlMath`
+
