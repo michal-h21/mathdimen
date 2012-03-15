@@ -121,7 +121,16 @@ To configure the hooks, you can create custom configuration file, for example `m
 
 There are three commands that you can use with `\Configure{AltMath}`:
 
--  `\EmptyMath` 
--  `\PictureMath`
--  `\MathMlMath`
+-  `\EmptyMath` - for referencing existing images
+-  `\PictureMath` - for convesion math into image
+-  `\MathMlMath` - for math without conversion - with `mathml` option it can be mathml
 
+Every one of these commands can be also configured. 
+Command `\Tg<tagname>` inserts `html` tag, we use inline `css` to set vertical alignment and height using `\depth` and `\height` commands. All dimensions are in `em`. The formula for computing the dimensions is `saved dimension in pt / ConvertPoints`. Default `ConvertPoints`  configuration is `\Configure{ConvertPoints}{10}{em}`. 
+This sample configuration will generate image of this form:
+
+```html
+<object data="sample0x.png.svg" type="image/svg+xml" style="height:1.248em; vertical-align:-0.16573em;"/><img 
+src="sample0x.png" alt="    √ -2----2
+c =   a  + b  "  type="image/svg+xml" style="height:1.248em; vertical-align:-0.16573em;" /></object>.
+```
