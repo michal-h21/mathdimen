@@ -100,6 +100,8 @@ With `mathdimen`, it is possible to use one image format as the preferred and ot
     Gdvipng -T tight -x 1400 -D 92 -bg Transparent -pp %%2:%%2 %%1 -o %%3
     Gdvisvgm -n -p %%2 -c 1.2,1.2 -s %%1 > %%3.svg
 
+Sample `tex4ht.env` configuration can be found in the `sample` directory.
+
 If you want to use the images with device, that has bigger screen resolution than PC monitor, for example some e-ink device, you can set the resolution of the image to higher values. You should set higher resolution also in the case, if you want to be able to resize the `html` page, only be aware that in some browsers (IE), subsampled images don't look good.
 
 ### Configuration of the hooks
