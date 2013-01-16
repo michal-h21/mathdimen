@@ -39,7 +39,7 @@
 \step@math@count
 \csuse{mathdim@\the\dmath@count}
 \a:FormatDisplay}
-\Configure{FormatDisplay}{\HCode{Nazdar\Hnewline}}
+%\Configure{FormatDisplay}{\HCode{Nazdar\Hnewline}}
 
 
 \def\AltMathRb#1\){%
